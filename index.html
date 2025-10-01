@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔨 Casse le Lingot d'Or</title>
+  <title>🃏 Le Joker Magique !</title>
   <style>
     * {
       margin: 0;
@@ -12,34 +12,43 @@
     }
 
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
       color: #fff;
       text-align: center;
       min-height: 100vh;
       padding: 10px;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    body {
+      filter: brightness(1.1) contrast(1.1);
     }
 
     .game-container {
-      width: 100%;
       max-width: 500px;
-      background: rgba(10, 15, 30, 0.9);
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 20px;
       padding: 20px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
-      border: 2px solid rgba(184, 134, 11, 0.5);
-      margin-bottom: 20px;
+      border: 2px solid rgba(139, 69, 19, 0.5);
     }
 
     .game-container::before {
@@ -49,11 +58,10 @@
       left: -2px;
       right: -2px;
       bottom: -2px;
-      background: linear-gradient(45deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b);
+      background: linear-gradient(45deg, #8B4513, #D2691E, #228B22, #8B4513);
       border-radius: 22px;
       z-index: -1;
       animation: borderGlow 3s linear infinite;
-      opacity: 0.7;
     }
 
     @keyframes borderGlow {
@@ -62,134 +70,13 @@
     }
 
     h1 {
-      font-size: 1.8em;
+      font-size: 2.2em;
       margin-bottom: 15px;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-      background: linear-gradient(45deg, #ffd700, #daa520, #b8860b);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      background: linear-gradient(45deg, #8B4513, #D2691E);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-
-    .squirrel-logo {
-      width: 50px;
-      height: 50px;
-      margin: 0 auto 15px;
-      background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f43f.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-      animation: squirrelBounce 2s ease-in-out infinite;
-    }
-
-    @keyframes squirrelBounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-5px) scale(1.05); }
-    }
-
-    .difficulty-selector {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 20px 0;
-      padding: 0 10px;
-    }
-
-    .difficulty-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      border-radius: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 3px solid transparent;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .difficulty-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      opacity: 0.3;
-      z-index: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .difficulty-btn.easy::before {
-      background: linear-gradient(45deg, #4CAF50, #8BC34A);
-    }
-
-    .difficulty-btn.medium::before {
-      background: linear-gradient(45deg, #FF9800, #FFC107);
-    }
-
-    .difficulty-btn.hard::before {
-      background: linear-gradient(45deg, #F44336, #E91E63);
-    }
-
-    .difficulty-btn.impossible::before {
-      background: linear-gradient(45deg, #8B00FF, #4B0082);
-    }
-
-    .difficulty-btn-image {
-      width: 70px;
-      height: 70px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .difficulty-btn-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      color: #fff;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .difficulty-btn.impossible {
-      animation: impossibleBtnGlow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes impossibleBtnGlow {
-      0% { box-shadow: 0 0 5px rgba(139, 0, 255, 0.5); }
-      100% { box-shadow: 0 0 20px rgba(139, 0, 255, 1); }
-    }
-
-    .difficulty-btn.active {
-      border-color: white;
-      box-shadow: 0 0 15px rgba(255,255,255,0.8);
-      transform: scale(1.05);
-    }
-
-    .difficulty-btn.active::before {
-      opacity: 0.6;
-    }
-
-    .difficulty-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .difficulty-btn.active:hover {
-      transform: scale(1.05) translateY(-2px);
     }
 
     .instructions {
@@ -198,25 +85,24 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(184, 134, 11, 0.3);
     }
 
     .instructions h2 {
-      font-size: 1.4em;
+      font-size: 1.5em;
       margin-bottom: 8px;
-      background: linear-gradient(45deg, #ffd700, #daa520);
+      background: linear-gradient(45deg, #8B4513, #D2691E);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .instructions p {
-      font-size: 1em;
+      font-size: 1.1em;
       font-weight: bold;
-      color: #daa520;
+      color: #D2691E;
     }
 
-    .gold-container {
+    .log-container {
       position: relative;
       margin: 20px auto;
       display: flex;
@@ -224,261 +110,148 @@
       align-items: center;
       width: 100%;
       min-height: 200px;
-      perspective: 1000px;
     }
 
-    /* Styles pour le lingot d'or 3D */
-    .gold-bar-3d {
-      width: 160px;
-      height: 60px;
+    .joker {
+      width: 200px;
+      height: 180px;
       margin: 0 auto;
+      background-image: url('https://i.ibb.co/dJbrpL91/joker-comics-villain-Photoroom.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       position: relative;
-      transform-style: preserve-3d;
       transition: all 0.3s ease;
+      filter: drop-shadow(0 0 15px rgba(139, 69, 19, 0.7));
       z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;
-      color: #b8860b;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    .gold-bar-3d .front {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #ffd700, #ffed4a, #ffd700);
-      border-radius: 8px;
-      transform: translateZ(15px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    .joker.noob {
+      filter: drop-shadow(0 0 15px rgba(135, 206, 235, 0.7)) brightness(1.2);
     }
 
-    .gold-bar-3d .top {
-      position: absolute;
-      width: 100%;
-      height: 30px;
-      background: linear-gradient(45deg, #daa520, #ffd700, #daa520);
-      border-radius: 8px 8px 0 0;
-      transform: rotateX(90deg) translateZ(15px);
-      top: -15px;
+    .joker.buchette {
+      filter: drop-shadow(0 0 15px rgba(218, 112, 214, 0.7)) brightness(1.1);
     }
 
-    .gold-bar-3d .side {
-      position: absolute;
-      width: 30px;
-      height: 100%;
-      background: linear-gradient(45deg, #b8860b, #daa520, #b8860b);
-      transform: rotateY(90deg) translateZ(80px);
-      right: -15px;
+    .joker.easy {
+      filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.7)) brightness(1.1);
     }
 
-    .gold-bar-3d .side.left {
-      transform: rotateY(-90deg) translateZ(80px);
-      left: -15px;
-      right: auto;
+    .joker.medium {
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) brightness(1.1) hue-rotate(15deg);
     }
 
-    .gold-bar-3d.pink .front {
-      background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
-      animation: pinkGlow 2s ease-in-out infinite alternate;
+    .joker.hard {
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg);
+      animation: redGlow 2s ease-in-out infinite alternate;
     }
 
-    .gold-bar-3d.pink .top {
-      background: linear-gradient(45deg, #c71585, #ff69b4, #c71585);
+    @keyframes redGlow {
+      0% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg); }
+      100% { filter: drop-shadow(0 0 35px rgba(255, 50, 50, 1)) brightness(1.3) hue-rotate(320deg); }
     }
 
-    .gold-bar-3d.pink .side {
-      background: linear-gradient(45deg, #8b008b, #c71585, #8b008b);
-    }
-
-    @keyframes pinkGlow {
-      0% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.8); }
-      100% { box-shadow: 0 0 30px rgba(255, 20, 147, 1); }
-    }
-
-    .gold-bar-3d.hit {
+    .joker.hit {
       animation: lightHit 0.4s ease-out;
     }
 
-    .gold-bar-3d.heavy-hit {
+    .joker.heavy-hit {
       animation: heavyHit 0.6s ease-out;
     }
 
-    .gold-bar-3d.critical-hit {
+    .joker.critical-hit {
       animation: criticalHit 0.8s ease-out;
     }
 
-    .gold-bar-3d.mega-hit {
+    .joker.mega-hit {
       animation: megaHit 1.2s ease-out;
     }
 
-    .gold-bar-3d.ultra-hit {
+    .joker.ultra-hit {
       animation: ultraHit 1.5s ease-out;
     }
 
-    .gold-bar-3d.cracked .front {
-      filter: brightness(0.7);
+    .joker.cracked {
+      filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
       animation: redPulse 1s infinite;
-      background: linear-gradient(45deg, #b8860b, #daa520, #b8860b);
     }
 
-    .gold-bar-3d.broken {
+    .joker.broken {
       opacity: 0.3;
       filter: grayscale(100%) brightness(0.3);
       animation: knockout 1.5s ease-out forwards;
     }
 
-    /* Styles pour les modes d'attaque avec images */
-    .attack-modes {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 15px 0;
-      flex-wrap: wrap;
-    }
-
-    .attack-mode-image {
-      width: 110px;
-      height: 110px;
-      cursor: pointer;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      position: relative;
-    }
-
-    .attack-mode-image:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-    }
-
-    .attack-mode-image.active {
-      border-color: #fff;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
-    }
-
-    .attack-mode-image img {
-      width: 65px;
-      height: 65px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    }
-
-    .attack-mode-label {
-      font-size: 13px;
-      margin-top: 5px;
-      font-weight: bold;
-      color: #feca57;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Animations pour le marteau */
-    .hammer {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      font-size: 2.5em;
-      z-index: 10;
-      top: -30px;
-      right: -15px;
-      transform-origin: bottom center;
-      transition: transform 0.3s ease;
-      pointer-events: none;
-    }
-
-    .hammer.hitting {
-      animation: hammerHit 0.4s ease-out;
-    }
-
-    @keyframes hammerHit {
-      0% { transform: rotate(0deg) translateY(0); }
-      50% { transform: rotate(-45deg) translateY(15px); }
-      100% { transform: rotate(0deg) translateY(0); }
-    }
-
     @keyframes lightHit {
-      0% { transform: translateY(0) scale(1); }
-      25% { transform: translateY(-5px) scale(0.95); }
-      50% { transform: translateY(3px) scale(1.02); }
-      75% { transform: translateY(-2px) scale(0.98); }
-      100% { transform: translateY(0) scale(1); }
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-10px) rotate(-5deg); }
+      50% { transform: translateX(5px) rotate(3deg); }
+      75% { transform: translateX(-3px) rotate(-2deg); }
+      100% { transform: translateX(0) rotate(0deg); }
     }
 
     @keyframes heavyHit {
-      0% { transform: translateY(0) scale(1); }
-      20% { transform: translateY(-8px) scale(0.9); }
-      40% { transform: translateY(5px) scale(1.05); }
-      60% { transform: translateY(-3px) scale(0.95); }
-      80% { transform: translateY(2px) scale(1.02); }
-      100% { transform: translateY(0) scale(1); }
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      20% { transform: translateX(-15px) rotate(-10deg) scale(0.95); }
+      40% { transform: translateX(8px) rotate(5deg) scale(1.05); }
+      60% { transform: translateX(-4px) rotate(-3deg) scale(0.98); }
+      80% { transform: translateX(2px) rotate(2deg) scale(1.02); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
     }
 
     @keyframes criticalHit {
-      0% { transform: translateY(0) scale(1); }
-      15% { transform: translateY(-12px) scale(0.85); }
-      30% { transform: translateY(8px) scale(1.1); }
-      45% { transform: translateY(-6px) scale(0.9); }
-      60% { transform: translateY(4px) scale(1.05); }
-      75% { transform: translateY(-2px) scale(0.97); }
-      90% { transform: translateY(1px) scale(1.02); }
-      100% { transform: translateY(0) scale(1); }
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      15% { transform: translateX(-20px) rotate(-15deg) scale(0.9); }
+      30% { transform: translateX(12px) rotate(10deg) scale(1.1); }
+      45% { transform: translateX(-8px) rotate(-6deg) scale(0.95); }
+      60% { transform: translateX(5px) rotate(4deg) scale(1.05); }
+      75% { transform: translateX(-3px) rotate(-2deg) scale(0.98); }
+      90% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
     }
 
     @keyframes megaHit {
-      0% { transform: translateY(0) scale(1); }
-      10% { transform: translateY(-15px) scale(0.8); }
-      20% { transform: translateY(10px) scale(1.15); }
-      30% { transform: translateY(-8px) scale(0.85); }
-      40% { transform: translateY(6px) scale(1.1); }
-      50% { transform: translateY(-4px) scale(0.9); }
-      60% { transform: translateY(3px) scale(1.05); }
-      70% { transform: translateY(-2px) scale(0.97); }
-      80% { transform: translateY(1px) scale(1.02); }
-      90% { transform: translateY(-0.5px) scale(0.99); }
-      100% { transform: translateY(0) scale(1); }
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      10% { transform: translateX(-25px) rotate(-20deg) scale(0.85); }
+      20% { transform: translateX(15px) rotate(12deg) scale(1.15); }
+      30% { transform: translateX(-12px) rotate(-8deg) scale(0.9); }
+      40% { transform: translateX(8px) rotate(6deg) scale(1.1); }
+      50% { transform: translateX(-6px) rotate(-4deg) scale(0.95); }
+      60% { transform: translateX(4px) rotate(3deg) scale(1.05); }
+      70% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
+      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      90% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
     }
 
     @keyframes ultraHit {
-      0% { transform: translateY(0) scale(1); }
-      8% { transform: translateY(-20px) scale(0.7); }
-      16% { transform: translateY(12px) scale(1.2); }
-      24% { transform: translateY(-10px) scale(0.8); }
-      32% { transform: translateY(8px) scale(1.15); }
-      40% { transform: translateY(-6px) scale(0.85); }
-      48% { transform: translateY(5px) scale(1.1); }
-      56% { transform: translateY(-3px) scale(0.9); }
-      64% { transform: translateY(2px) scale(1.05); }
-      72% { transform: translateY(-1px) scale(0.97); }
-      80% { transform: translateY(0.5px) scale(1.02); }
-      88% { transform: translateY(-0.3px) scale(0.99); }
-      96% { transform: translateY(0.1px) scale(1.01); }
-      100% { transform: translateY(0) scale(1); }
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      8% { transform: translateX(-30px) rotate(-25deg) scale(0.8); }
+      16% { transform: translateX(20px) rotate(15deg) scale(1.2); }
+      24% { transform: translateX(-15px) rotate(-12deg) scale(0.85); }
+      32% { transform: translateX(12px) rotate(10deg) scale(1.15); }
+      40% { transform: translateX(-8px) rotate(-8deg) scale(0.9); }
+      48% { transform: translateX(6px) rotate(5deg) scale(1.1); }
+      56% { transform: translateX(-4px) rotate(-4deg) scale(0.95); }
+      64% { transform: translateX(3px) rotate(3deg) scale(1.05); }
+      72% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
+      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      88% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
+      96% { transform: translateX(0.3px) rotate(0.3deg) scale(1.01); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
     }
 
     @keyframes knockout {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      30% { transform: translateY(-10px) scale(0.9); opacity: 0.9; }
-      70% { transform: translateY(40px) scale(0.7); opacity: 0.7; }
-      100% { transform: translateY(60px) scale(0.6); opacity: 0.4; }
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+      30% { transform: translateY(-10px) rotate(-15deg) scale(0.95); opacity: 0.9; }
+      70% { transform: translateY(40px) rotate(-90deg) scale(0.8); opacity: 0.7; }
+      100% { transform: translateY(60px) rotate(-90deg) scale(0.7); opacity: 0.4; }
     }
 
     @keyframes redPulse {
-      0%, 100% { filter: brightness(0.7); }
-      50% { filter: brightness(0.5); }
+      0%, 100% { filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
+      50% { filter: brightness(0.5) drop-shadow(0 0 25px rgba(255, 0, 0, 1)); }
     }
 
     .screen-shake {
@@ -495,40 +268,36 @@
 
     @keyframes screenShake {
       0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
     }
 
     @keyframes megaShake {
       0%, 100% { transform: translateX(0) translateY(0); }
-      10% { transform: translateX(-8px) translateY(-3px); }
-      20% { transform: translateX(8px) translateY(3px); }
-      30% { transform: translateX(-6px) translateY(-2px); }
-      40% { transform: translateX(6px) translateY(2px); }
-      50% { transform: translateX(-4px) translateY(-1px); }
-      60% { transform: translateX(4px) translateY(1px); }
+      10% { transform: translateX(-5px) translateY(-2px); }
+      20% { transform: translateX(5px) translateY(2px); }
+      30% { transform: translateX(-4px) translateY(-1px); }
+      40% { transform: translateX(4px) translateY(1px); }
+      50% { transform: translateX(-3px) translateY(-1px); }
+      60% { transform: translateX(3px) translateY(1px); }
       70% { transform: translateX(-2px) translateY(-0.5px); }
       80% { transform: translateX(2px) translateY(0.5px); }
     }
 
     @keyframes ultraShake {
       0%, 100% { transform: translateX(0) translateY(0); }
-      5% { transform: translateX(-12px) translateY(-5px); }
-      10% { transform: translateX(12px) translateY(5px); }
-      15% { transform: translateX(-10px) translateY(-4px); }
-      20% { transform: translateX(10px) translateY(4px); }
-      25% { transform: translateX(-8px) translateY(-3px); }
-      30% { transform: translateX(8px) translateY(3px); }
-      35% { transform: translateX(-6px) translateY(-2px); }
-      40% { transform: translateX(6px) translateY(2px); }
-      45% { transform: translateX(-4px) translateY(-1px); }
-      50% { transform: translateX(4px) translateY(1px); }
-      55% { transform: translateX(-3px) translateY(-1px); }
-      60% { transform: translateX(3px) translateY(1px); }
-      65% { transform: translateX(-2px) translateY(-0.5px); }
-      70% { transform: translateX(2px) translateY(0.5px); }
-      75% { transform: translateX(-1px) translateY(-0.2px); }
-      80% { transform: translateX(1px) translateY(0.2px); }
+      5% { transform: translateX(-8px) translateY(-3px); }
+      10% { transform: translateX(8px) translateY(3px); }
+      15% { transform: translateX(-6px) translateY(-2px); }
+      20% { transform: translateX(6px) translateY(2px); }
+      25% { transform: translateX(-4px) translateY(-1px); }
+      30% { transform: translateX(4px) translateY(1px); }
+      35% { transform: translateX(-3px) translateY(-1px); }
+      40% { transform: translateX(3px) translateY(1px); }
+      45% { transform: translateX(-2px) translateY(-0.5px); }
+      50% { transform: translateX(2px) translateY(0.5px); }
+      55% { transform: translateX(-1px) translateY(-0.2px); }
+      60% { transform: translateX(1px) translateY(0.2px); }
     }
 
     .impact-effect {
@@ -538,41 +307,154 @@
       z-index: 3;
       animation: impactPop 1s ease-out forwards;
       opacity: 0;
-      filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
     }
 
     @keyframes impactPop {
       0% { opacity: 0; transform: scale(0.3) translateY(0); }
-      30% { opacity: 1; transform: scale(1.5) translateY(-15px); }
-      100% { opacity: 0; transform: scale(1) translateY(-50px); }
+      30% { opacity: 1; transform: scale(1.3) translateY(-10px); }
+      100% { opacity: 0; transform: scale(1) translateY(-30px); }
+    }
+
+    /* Styles pour la hache */
+    .axe {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0;
+      transform-origin: bottom center;
+    }
+
+    .axe-head {
+      position: absolute;
+      width: 35px;
+      height: 25px;
+      background: linear-gradient(45deg, #C0C0C0, #E5E5E5, #C0C0C0);
+      clip-path: polygon(0% 50%, 30% 0%, 100% 30%, 100% 70%, 30% 100%);
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .axe-handle {
+      position: absolute;
+      width: 8px;
+      height: 50px;
+      background: linear-gradient(to bottom, #8B4513, #654321);
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .axe-hit {
+      animation: axeSwing 0.6s ease-out forwards;
+    }
+
+    @keyframes axeSwing {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -100%) rotate(-35deg) scale(0.8);
+      }
+      20% {
+        opacity: 1;
+        transform: translate(-50%, -100%) rotate(15deg) scale(1);
+      }
+      40% {
+        transform: translate(-50%, -100%) rotate(-10deg) scale(1.1);
+      }
+      60% {
+        transform: translate(-50%, -100%) rotate(5deg) scale(1);
+      }
+      80% {
+        transform: translate(-50%, -100%) rotate(-2deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -100%) rotate(0deg) scale(0.8);
+      }
+    }
+
+    .attack-modes {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .attack-mode-image {
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      position: relative;
+    }
+
+    .attack-mode-image:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .attack-mode-image.active {
+      border-color: #fff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .attack-mode-image img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+    }
+
+    .attack-mode-label {
+      font-size: 10px;
+      margin-top: 3px;
+      font-weight: bold;
+      color: #feca57;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
     }
 
     .controls {
       margin: 15px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
     }
 
     button {
       padding: 12px 25px;
-      font-size: 16px;
+      margin: 8px;
+      font-size: 14px;
       cursor: pointer;
       border: none;
-      border-radius: 25px;
-      background: linear-gradient(45deg, #b8860b, #daa520);
+      border-radius: 20px;
+      background: linear-gradient(45deg, #8B4513, #654321);
       color: #fff;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       text-transform: uppercase;
       font-weight: bold;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-      background: linear-gradient(45deg, #daa520, #ffd700);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #D2691E, #8B4513);
     }
 
     button:active {
@@ -589,27 +471,33 @@
 
     #message {
       margin: 15px 0;
-      font-size: 1em;
+      font-size: 1.1em;
       font-weight: bold;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
       min-height: 25px;
-      color: #daa520;
     }
 
     .result-box {
-      background: linear-gradient(135deg, rgba(184, 134, 11, 0.9), rgba(218, 165, 32, 0.9));
-      padding: 15px;
-      border-radius: 15px;
-      margin: 15px 0;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
+      background: linear-gradient(135deg, rgba(139, 69, 19, 0.95), rgba(210, 105, 30, 0.95));
+      padding: 20px;
+      border-radius: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
       animation: fadeInUp 0.5s ease;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     }
 
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
@@ -623,13 +511,13 @@
 
     .coins-display {
       position: absolute;
-      top: -20px;
+      top: -15px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(45deg, #b8860b, #daa520);
+      background: linear-gradient(45deg, #8B4513, #D2691E);
       color: white;
-      padding: 5px 15px;
-      border-radius: 20px;
+      padding: 4px 12px;
+      border-radius: 15px;
       font-weight: bold;
       animation: coinPop 1s ease;
       pointer-events: none;
@@ -639,15 +527,15 @@
     @keyframes coinPop {
       0% {
         opacity: 0;
-        transform: translateX(-50%) translateY(20px) scale(0.5);
+        transform: translateX(-50%) translateY(15px) scale(0.5);
       }
       50% {
         opacity: 1;
-        transform: translateX(-50%) translateY(-10px) scale(1.2);
+        transform: translateX(-50%) translateY(-8px) scale(1.1);
       }
       100% {
         opacity: 0;
-        transform: translateX(-50%) translateY(-30px) scale(1);
+        transform: translateX(-50%) translateY(-25px) scale(1);
       }
     }
 
@@ -655,124 +543,251 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background: linear-gradient(45deg, #b8860b, #daa520);
+      background: linear-gradient(45deg, #8B4513, #654321);
       padding: 8px 15px;
       border-radius: 20px;
       font-weight: bold;
       font-size: 0.9em;
       display: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       border: 2px solid rgba(255,255,255,0.2);
     }
 
-    /* Styles pour les écrans plus larges (tablettes) */
-    @media (min-width: 768px) {
+    .reward-image {
+      width: 120px;
+      height: 120px;
+      margin: 10px auto;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .difficulty-selector {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .difficulty-btn {
+      width: 80px;
+      height: 90px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .difficulty-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), transparent);
+      pointer-events: none;
+    }
+
+    .difficulty-btn img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+      margin-bottom: 4px;
+    }
+
+    .difficulty-btn-label {
+      font-size: 10px;
+      font-weight: bold;
+      color: #feca57;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+
+    .difficulty-btn.noob .difficulty-btn-label {
+      color: #87CEEB;
+    }
+
+    .difficulty-btn.buchette .difficulty-btn-label {
+      color: #DDA0DD;
+    }
+
+    .difficulty-btn.easy .difficulty-btn-label {
+      color: #4CAF50;
+    }
+
+    .difficulty-btn.medium .difficulty-btn-label {
+      color: #FF9800;
+    }
+
+    .difficulty-btn.hard .difficulty-btn-label {
+      color: #F44336;
+    }
+
+    .difficulty-btn:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .difficulty-btn.active {
+      border-color: #ffd700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      transform: scale(1.08);
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    /* Styles pour mobile */
+    @media (max-width: 480px) {
       .game-container {
-        padding: 30px;
-        max-width: 600px;
+        padding: 15px;
+        margin: 5px;
       }
       
       h1 {
-        font-size: 2.2em;
+        font-size: 1.8em;
       }
       
-      .gold-bar-3d {
-        width: 200px;
-        height: 80px;
-        font-size: 2em;
+      .joker {
+        width: 160px;
+        height: 140px;
       }
       
-      .gold-bar-3d .side {
-        width: 40px;
-        transform: rotateY(90deg) translateZ(100px);
+      .instructions {
+        padding: 10px;
+        margin: 15px 0;
       }
       
-      .gold-bar-3d .side.left {
-        transform: rotateY(-90deg) translateZ(100px);
+      .instructions h2 {
+        font-size: 1.3em;
       }
       
-      .gold-bar-3d .top {
-        height: 40px;
-        transform: rotateX(90deg) translateZ(20px);
-        top: -20px;
+      .instructions p {
+        font-size: 1em;
       }
       
-      .hammer {
-        width: 80px;
-        height: 80px;
-        font-size: 3em;
-        top: -40px;
-        right: -20px;
-      }
-      
-      .controls {
-        flex-direction: row;
-        justify-content: center;
-      }
-      
-      button {
-        padding: 15px 30px;
+      .attack-modes {
+        gap: 5px;
       }
 
       .attack-mode-image {
-        width: 100px;
-        height: 100px;
-      }
-
-      .attack-mode-image img {
-        width: 55px;
-        height: 55px;
-      }
-    }
-
-    /* Styles pour les écrans très larges */
-    @media (min-width: 1024px) {
-      body {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 20px;
-      }
-      
-      .game-container {
-        margin: 0 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .difficulty-selector {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        padding: 0 5px;
-      }
-
-      .difficulty-btn-image {
         width: 60px;
         height: 60px;
       }
 
-      .difficulty-btn-label {
-        font-size: 10px;
-      }
-
-      .attack-modes {
-        gap: 5px;
-        padding: 0 5px;
-      }
-
-      .attack-mode-image {
-        width: 85px;
-        height: 85px;
-      }
-
       .attack-mode-image img {
-        width: 50px;
-        height: 50px;
+        width: 35px;
+        height: 35px;
       }
 
       .attack-mode-label {
-        font-size: 11px;
+        font-size: 9px;
       }
+      
+      button {
+        padding: 10px 20px;
+        font-size: 13px;
+        margin: 5px;
+      }
+      
+      .difficulty-btn {
+        width: 70px;
+        height: 80px;
+      }
+      
+      .difficulty-btn img {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .difficulty-btn-label {
+        font-size: 9px;
+      }
+      
+      .reward-image {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* Effets de particules */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #D2691E;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Styles améliorés pour la fin du jeu */
+    .victory-message {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #D2691E;
+      text-shadow: 0 0 10px rgba(210, 105, 30, 0.7);
+    }
+
+    .reward-text {
+      font-size: 1.3em;
+      margin: 10px 0;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .difficulty-badge.noob {
+      background: linear-gradient(45deg, #87CEEB, #B0E0E6);
+      color: #000;
+    }
+
+    .difficulty-badge.buchette {
+      background: linear-gradient(45deg, #DDA0DD, #DA70D6);
+    }
+
+    .difficulty-badge.easy {
+      background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    }
+
+    .difficulty-badge.medium {
+      background: linear-gradient(45deg, #FF9800, #FFC107);
+    }
+
+    .difficulty-badge.hard {
+      background: linear-gradient(45deg, #F44336, #E91E63);
     }
   </style>
 </head>
@@ -780,45 +795,41 @@
   <div class="game-container" id="gameContainer">
     <div class="combo-indicator" id="comboIndicator">COMBO x0</div>
 
-    <h1>🔨 Casse le Lingot d'Or !</h1>
-    <div class="squirrel-logo"></div>
+    <h1>🃏 Le Joker Magique !</h1>
     
-    <!-- Sélecteur de niveaux avec images -->
     <div class="difficulty-selector">
-      <div class="difficulty-btn easy active" data-difficulty="easy">
-        <div class="difficulty-btn-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkZIBKVuctd-81US1fPCxkxx5qaA3KNSzRVw&s');"></div>
+      <div class="difficulty-btn noob active" data-difficulty="noob">
+        <img src="https://i.ibb.co/gFMBxFzP/IMG-6063.png" alt="Noob">
+        <div class="difficulty-btn-label">Noob</div>
+      </div>
+      <div class="difficulty-btn buchette" data-difficulty="buchette">
+        <img src="https://i.ibb.co/JMPfpWV/IMG-5851.png" alt="Buchette">
+        <div class="difficulty-btn-label">Buchette</div>
+      </div>
+      <div class="difficulty-btn easy" data-difficulty="easy">
+        <img src="https://i.ibb.co/p6s7HT5n/IMG-7322.png" alt="Facile">
         <div class="difficulty-btn-label">Facile</div>
       </div>
       <div class="difficulty-btn medium" data-difficulty="medium">
-        <div class="difficulty-btn-image" style="background-image: url('https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8520d47b59c202a4534c1560a355ae06~tplv-obj.webp');"></div>
+        <img src="https://i.ibb.co/hxXnkQh7/IMG-5861.png" alt="Moyen">
         <div class="difficulty-btn-label">Moyen</div>
       </div>
       <div class="difficulty-btn hard" data-difficulty="hard">
-        <div class="difficulty-btn-image" style="background-image: url('https://i.ibb.co/JR5SS5vd/IMG-6570.png');"></div>
+        <img src="https://i.ibb.co/DHBNtX7t/IMG-6573.png" alt="Difficile">
         <div class="difficulty-btn-label">Difficile</div>
-      </div>
-      <div class="difficulty-btn impossible" data-difficulty="impossible">
-        <div class="difficulty-btn-image" style="background-image: url('https://i.ibb.co/5XX6nS2W/unnamed-Photoroom.png');"></div>
-        <div class="difficulty-btn-label">Impossible</div>
       </div>
     </div>
     
-    <div class="gold-container">
-      <div class="gold-bar-3d" id="goldBar">
-        <div class="front">💰</div>
-        <div class="top"></div>
-        <div class="side"></div>
-        <div class="side left"></div>
-      </div>
-      <div class="hammer" id="hammer">🔨</div>
+    <div class="log-container">
+      <div class="joker easy" id="joker"></div>
+      <div class="particles-container" id="particlesContainer"></div>
     </div>
 
     <div class="instructions">
-      <h2>🌹 Casse le Lingot d'Or et Gagne le Cadeau ! 🌹</h2>
-      <p>Une Rose - Un Coup de Marteau</p>
+      <h2>🪓 Frappe le Joker et Gagne le Trésor ! 🪓</h2>
+      <p>Un Coup de Hache = Un Point de Vie en Moins</p>
     </div>
 
-    <!-- Modes d'attaque avec images -->
     <div class="attack-modes">
       <div id="mode1" class="attack-mode-image active">
         <img src="https://i.ibb.co/WNXDxn2y/IMG-7354-Photoroom.png" alt="Rose - 1 coup">
@@ -847,15 +858,17 @@
     </div>
 
     <div class="controls">
-      <button id="attackBtn">Frapper (1 coup)</button>
-      <button id="resetBtn">Nouveau Lingot</button>
+      <button id="attackBtn">Attaquer (1 coup)</button>
+      <button id="resetBtn">Nouveau Joker</button>
     </div>
 
     <p id="message"></p>
 
     <div id="resultContainer" class="hidden result-box">
-      <h3>🎉 Lingot Cassé ! 🎉</h3>
-      <p id="coinsResult">Vous avez gagné 0 rose !</p>
+      <h3>🎉 Joker Vaincu ! 🎉</h3>
+      <div id="rewardImage" class="reward-image"></div>
+      <p id="coinsResult" class="reward-text"></p>
+      <div id="victoryMessage" class="victory-message"></div>
     </div>
   </div>
 
@@ -863,31 +876,25 @@
     let maxHP, currentHP, coupCounter, totalHits;
     let hitsUntilCoin = 4;
     let attackMode = 1;
-    let rosesEarnedThisGold = 0;
+    let coinsEarnedThisLog = 0;
     let combo = 0;
     let lastHitTime = 0;
     let isAttacking = false;
     let audioContext = null;
-    let isPinkGold = false;
-    let currentDifficulty = "easy";
+    let currentDifficulty = "noob";
 
-    const goldBar = document.getElementById("goldBar");
-    const hammer = document.getElementById("hammer");
+    const joker = document.getElementById("joker");
     const message = document.getElementById("message");
     const attackBtn = document.getElementById("attackBtn");
     const resultContainer = document.getElementById("resultContainer");
     const coinsResult = document.getElementById("coinsResult");
+    const victoryMessage = document.getElementById("victoryMessage");
     const gameContainer = document.getElementById("gameContainer");
     const comboIndicator = document.getElementById("comboIndicator");
+    const rewardImage = document.getElementById("rewardImage");
+    const particlesContainer = document.getElementById("particlesContainer");
 
-    const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢"];
-
-    const difficultyNames = {
-      easy: "facile",
-      medium: "moyen", 
-      hard: "difficile",
-      impossible: "impossible"
-    };
+    const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢", "🪓", "🃏"];
 
     // Système audio
     function initAudioContext() {
@@ -934,77 +941,74 @@
     }
 
     function playCrackSound() {
-      createSound(150, 0.3, 'sawtooth');
-      setTimeout(() => createSound(100, 0.2, 'sawtooth'), 100);
+      createSound(250, 0.3, 'sawtooth');
+      setTimeout(() => createSound(180, 0.2, 'sawtooth'), 100);
     }
 
     function playBreakSound() {
-      createSound(80, 0.5, 'sawtooth');
-      setTimeout(() => createSound(200, 0.3, 'square'), 100);
-      setTimeout(() => createSound(400, 0.2, 'sine'), 200);
+      createSound(120, 0.5, 'sawtooth');
+      setTimeout(() => createSound(350, 0.3, 'square'), 100);
+      setTimeout(() => createSound(650, 0.2, 'sine'), 200);
     }
 
-    // Fonctions d'effets visuels pour le lingot d'or
-    function createGoldShards() {
-      const container = goldBar.parentElement;
+    // Fonction pour créer une hache animée
+    function createAxe() {
+      const axe = document.createElement('div');
+      axe.className = 'axe';
       
-      for (let i = 0; i < 8; i++) {
-        const shard = document.createElement('div');
-        shard.style.cssText = `
-          position: absolute;
-          width: 10px;
-          height: 6px;
-          background: linear-gradient(45deg, #ffd700, #ffed4a);
-          border-radius: 2px;
-          pointer-events: none;
-          left: 50%;
-          top: 50%;
-          z-index: 1000;
-        `;
-        
-        container.appendChild(shard);
-        
-        const angle = (i / 8) * Math.PI * 2;
-        const distance = 80 + Math.random() * 80;
-        const duration = 600 + Math.random() * 400;
-        
-        shard.animate([
-          {
-            transform: 'translate(-50%, -50%) scale(1)',
-            opacity: 1
-          },
-          {
-            transform: `translate(calc(-50% + ${Math.cos(angle) * distance}px), calc(-50% + ${Math.sin(angle) * distance}px)) scale(0)`,
-            opacity: 0
-          }
-        ], {
-          duration: duration,
-          easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        }).onfinish = () => shard.remove();
-      }
+      // Utiliser l'image de la hache fournie
+      axe.style.backgroundImage = "url('https://i.ibb.co/bR7Dg53p/large-9267279-Photoroom.png')";
+      axe.style.backgroundSize = "contain";
+      axe.style.backgroundRepeat = "no-repeat";
+      axe.style.backgroundPosition = "center";
+      axe.style.width = "80px";
+      axe.style.height = "80px";
+      
+      // Positionner la hache au-dessus du Joker
+      const jokerRect = joker.getBoundingClientRect();
+      const containerRect = joker.parentElement.getBoundingClientRect();
+      
+      axe.style.left = (jokerRect.left + jokerRect.width/2 - containerRect.left) + 'px';
+      axe.style.top = (jokerRect.top - containerRect.top) + 'px';
+      
+      joker.parentElement.appendChild(axe);
+      
+      return axe;
     }
 
+    // Fonction pour animer la hache
+    function animateAxe() {
+      const axe = createAxe();
+      axe.classList.add('axe-hit');
+      
+      // Supprimer la hache après l'animation
+      setTimeout(() => {
+        if (axe.parentElement) {
+          axe.parentElement.removeChild(axe);
+        }
+      }, 600);
+    }
+
+    // Fonction pour créer des particules d'impact
     function createHitParticles() {
-      const container = goldBar.parentElement;
-      
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 8; i++) {
         const particle = document.createElement('div');
-        particle.style.cssText = `
-          position: absolute;
-          width: 6px;
-          height: 6px;
-          background: #ffd700;
-          border-radius: 50%;
-          pointer-events: none;
-          left: ${45 + Math.random() * 10}%;
-          top: ${45 + Math.random() * 10}%;
-          z-index: 999;
-        `;
+        particle.className = 'particle';
         
-        container.appendChild(particle);
+        const jokerRect = joker.getBoundingClientRect();
+        const containerRect = joker.parentElement.getBoundingClientRect();
+        
+        particle.style.left = (jokerRect.left + jokerRect.width/2 - containerRect.left + (Math.random() * 60 - 30)) + 'px';
+        particle.style.top = (jokerRect.top + jokerRect.height/2 - containerRect.top + (Math.random() * 60 - 30)) + 'px';
+        
+        // Couleurs des particules (violet et vert pour le Joker)
+        const colors = ['#800080', '#4B0082', '#32CD32', '#9ACD32'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        
+        particlesContainer.appendChild(particle);
         
         const angle = Math.random() * Math.PI * 2;
-        const distance = 20 + Math.random() * 20;
+        const distance = 30 + Math.random() * 40;
         
         particle.animate([
           {
@@ -1016,7 +1020,7 @@
             opacity: 0
           }
         ], {
-          duration: 300,
+          duration: 500 + Math.random() * 300,
           easing: 'ease-out'
         }).onfinish = () => particle.remove();
       }
@@ -1026,10 +1030,10 @@
       const effect = document.createElement('div');
       effect.className = 'impact-effect';
       effect.textContent = impactEffects[Math.floor(Math.random() * impactEffects.length)];
-      effect.style.left = (Math.random() * 80 + 10) + '%';
-      effect.style.top = (Math.random() * 60 + 20) + '%';
+      effect.style.left = (Math.random() * 70 + 15) + '%';
+      effect.style.top = (Math.random() * 50 + 25) + '%';
       
-      document.querySelector('.gold-container').appendChild(effect);
+      document.querySelector('.log-container').appendChild(effect);
       
       setTimeout(() => {
         effect.remove();
@@ -1050,7 +1054,7 @@
       }
     }
 
-    // Fonction d'attaque avec animation du marteau
+    // Fonction d'attaque
     function attack() {
       if (currentHP <= 0 || isAttacking) return;
       
@@ -1058,11 +1062,12 @@
       
       let hits = attackMode;
       let actualHits = 0;
-      let rosesEarned = 0;
-      let wasCracked = goldBar.classList.contains('cracked');
+      let coinsEarned = 0;
+      let wasCracked = joker.classList.contains('cracked');
       
-      // Animation du marteau
-      hammer.classList.add('hitting');
+      // Animer la hache
+      animateAxe();
+      
       playHitSound();
       createHitParticles();
       createImpactEffect();
@@ -1084,12 +1089,15 @@
         animationType = 'critical-hit';
         shakeType = 'mega-shake';
         animationDuration = 800;
+      } else if (attackMode >= 30) {
+        animationType = 'heavy-hit';
+        animationDuration = 600;
       } else if (attackMode >= 10) {
         animationType = 'heavy-hit';
         animationDuration = 600;
       }
 
-      goldBar.classList.add(animationType);
+      joker.classList.add(animationType);
       if (shakeType) gameContainer.classList.add(shakeType);
       
       for (let i = 0; i < hits && currentHP > 0; i++) {
@@ -1097,32 +1105,29 @@
         actualHits++;
         totalHits++;
 
-        if (coupCounter >= 2) {
-          coupCounter = 0;
-          currentHP--;
-        }
+        // 1 coup = -1 point de vie
+        currentHP--;
 
         hitsUntilCoin--;
         if (hitsUntilCoin <= 0) {
-          rosesEarnedThisGold++;
-          rosesEarned++;
+          coinsEarnedThisLog++;
+          coinsEarned++;
           hitsUntilCoin = 4;
         }
       }
       
-      if (rosesEarned > 0) {
-        showRoseGain(rosesEarned);
+      if (coinsEarned > 0) {
+        showCoinGain(coinsEarned);
       }
       
       updateUI();
       
-      if (!wasCracked && goldBar.classList.contains('cracked')) {
+      if (!wasCracked && joker.classList.contains('cracked')) {
         playCrackSound();
       }
       
       setTimeout(() => {
-        goldBar.classList.remove(animationType);
-        hammer.classList.remove('hitting');
+        joker.classList.remove(animationType);
         if (shakeType) gameContainer.classList.remove(shakeType);
         isAttacking = false;
         
@@ -1132,51 +1137,96 @@
       }, animationDuration);
     }
 
-    function showRoseGain(amount) {
-      const roseDisplay = document.createElement('div');
-      roseDisplay.className = 'coins-display';
-      roseDisplay.textContent = `+${amount} 🌹`;
-      goldBar.parentElement.appendChild(roseDisplay);
+    function showCoinGain(amount) {
+      const coinDisplay = document.createElement('div');
+      coinDisplay.className = 'coins-display';
+      coinDisplay.textContent = `+${amount} 🪙`;
+      joker.parentElement.appendChild(coinDisplay);
       
       setTimeout(() => {
-        roseDisplay.remove();
+        coinDisplay.remove();
       }, 1000);
     }
 
     function updateUI() {
       if (currentHP === 0) {
-        goldBar.className = "gold-bar-3d broken";
-        message.textContent = "💥 Le lingot s'est brisé !";
+        joker.className = "joker broken " + currentDifficulty;
+        message.textContent = "💥 Le Joker a été vaincu !";
       } else {
-        if (maxHP - currentHP >= 20) {
-          goldBar.classList.add("cracked");
-          message.textContent = "⚠️ Le lingot commence à se fissurer...";
+        if (maxHP - currentHP >= maxHP * 0.7) {
+          joker.classList.add("cracked");
+          message.textContent = "⚠️ Le Joker commence à se fendre...";
         } else {
-          goldBar.classList.remove("cracked");
-          if (isPinkGold) {
-            message.textContent = "✨ LINGOT ROSE SPÉCIAL ! ✨";
-          } else {
-            message.textContent = `Lingot ${difficultyNames[currentDifficulty]} - À tout moment le lingot peut se briser...`;
+          joker.classList.remove("cracked");
+          let difficultyName = "";
+          switch(currentDifficulty) {
+            case "noob": difficultyName = "noob"; break;
+            case "buchette": difficultyName = "buchette"; break;
+            case "easy": difficultyName = "facile"; break;
+            case "medium": difficultyName = "moyenne"; break;
+            case "hard": difficultyName = "difficile"; break;
           }
+          message.textContent = `Joker ${difficultyName} - À tout moment le Joker peut être vaincu...`;
         }
       }
     }
 
     function endGame() {
-      let recompense = Math.floor(maxHP / 2);
+      let recompense = 0;
+      let rewardText = "";
+      let victoryText = "";
+      let rewardImg = "";
+      
+      // Déterminer la récompense selon la difficulté
+      switch(currentDifficulty) {
+        case "noob":
+          recompense = 300; // 300 pièces
+          rewardText = "300 pièces d'or !";
+          victoryText = "Bravo ! Tu as gagné tes premières pièces !";
+          rewardImg = "https://i.ibb.co/gFMBxFzP/IMG-6063.png";
+          break;
+        case "buchette":
+          recompense = 1; // Galaxie
+          rewardText = "vous avez gagnez une galaxie !";
+          victoryText = "Incroyable ! Tu as découvert une galaxie entière !";
+          rewardImg = "https://i.ibb.co/JMPfpWV/IMG-5851.png";
+          break;
+        case "easy":
+          recompense = 3000; // 3000 pièces
+          rewardText = "Vous avez gagné 3000 pièces !";
+          victoryText = "Félicitations ! Tu as remporté un superbe trésor !";
+          rewardImg = "https://i.ibb.co/p6s7HT5n/IMG-7322.png";
+          break;
+        case "medium":
+          recompense = 5000; // 5000 pièces
+          rewardText = "Vous avez gagné 5000 pièces !";
+          victoryText = "Incroyable ! Tu as trouvé un trésor précieux !";
+          rewardImg = "https://i.ibb.co/hxXnkQh7/IMG-5861.png";
+          break;
+        case "hard":
+          recompense = 10000; // 10000 pièces
+          rewardText = "Vous avez gagné 10000 pièces !";
+          victoryText = "Victoire totale ! Tu as remporté le jackpot !";
+          rewardImg = "https://i.ibb.co/DHBNtX7t/IMG-6573.png";
+          break;
+      }
       
       playBreakSound();
-      setTimeout(() => createGoldShards(), 100);
       
-      message.textContent = "💥 Félicitations ! Tu as cassé le lingot d'or ! 🌹✨";
+      message.textContent = "💥 Félicitations ! Tu as vaincu le Joker ! 🪓✨";
       
       setTimeout(() => {
+        rewardImage.style.backgroundImage = `url('${rewardImg}')`;
+        
+        // Message de victoire clair et épuré
         coinsResult.innerHTML = `
-          <strong>🎉 BRAVO ! 🎉</strong><br>
-          Tu as cassé le lingot d'or !<br>
-          <div style="font-size: 3em; margin: 10px 0; color: #feca57;">${recompense}</div>
-          <strong>Ta récompense : ${recompense} rose${recompense > 1 ? 's' : ''} !</strong>
+          <div class="difficulty-badge ${currentDifficulty}">NIVEAU ${currentDifficulty.toUpperCase()}</div><br>
+          <strong>RÉCOMPENSE :</strong><br>
+          ${rewardText}
         `;
+        
+        victoryMessage.textContent = victoryText;
+        
         resultContainer.classList.remove("hidden");
       }, 500);
       
@@ -1193,62 +1243,70 @@
       const btnEl = document.getElementById(`mode${mode}`);
       if (btnEl) btnEl.classList.add('active');
 
-      attackBtn.textContent = `Frapper (${mode} coup${mode > 1 ? 's' : ''})`;
+      attackBtn.textContent = `Attaquer (${mode} coup${mode > 1 ? 's' : ''})`;
     }
 
     function setDifficulty(difficulty) {
       currentDifficulty = difficulty;
       
+      // Mettre à jour l'apparence des boutons de difficulté
       document.querySelectorAll('.difficulty-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       document.querySelector(`.difficulty-btn.${difficulty}`).classList.add('active');
       
+      // Mettre à jour l'apparence du Joker
+      joker.className = "joker " + difficulty;
+      
+      // Réinitialiser le jeu avec la nouvelle difficulté
       initGame();
     }
 
     function initGame() {
-      // Points de vie selon la difficulté
+      // Définir les points de vie selon la difficulté
       switch(currentDifficulty) {
+        case "noob":
+          maxHP = 1500;
+          break;
+        case "buchette":
+          maxHP = 5000;
+          break;
         case "easy":
-          maxHP = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+          maxHP = 15000;
           break;
         case "medium":
-          maxHP = Math.floor(Math.random() * (20000 - 10000 + 1)) + 10000;
+          maxHP = 25000;
           break;
         case "hard":
-          maxHP = Math.floor(Math.random() * (40000 - 20000 + 1)) + 20000;
-          break;
-        case "impossible":
-          maxHP = Math.floor(Math.random() * (80000 - 40000 + 1)) + 40000;
+          maxHP = 50000;
           break;
       }
-
+      
       currentHP = maxHP;
       coupCounter = 0;
       totalHits = 0;
       hitsUntilCoin = 4;
-      rosesEarnedThisGold = 0;
+      coinsEarnedThisLog = 0;
       combo = 0;
       lastHitTime = 0;
       isAttacking = false;
       
-      isPinkGold = Math.random() < 0.1;
+      joker.className = "joker " + currentDifficulty;
       
-      goldBar.className = "gold-bar-3d";
-      if (isPinkGold) {
-        goldBar.classList.add("pink");
-        message.textContent = "✨ LINGOT ROSE SPÉCIAL ! ✨";
-      } else {
-        message.textContent = `Lingot ${difficultyNames[currentDifficulty]} - À tout moment le lingot peut se briser...`;
+      // Message selon la difficulté
+      let difficultyName = "";
+      switch(currentDifficulty) {
+        case "noob": difficultyName = "noob"; break;
+        case "buchette": difficultyName = "buchette"; break;
+        case "easy": difficultyName = "facile"; break;
+        case "medium": difficultyName = "moyenne"; break;
+        case "hard": difficultyName = "difficile"; break;
       }
+      
+      message.textContent = `Joker ${difficultyName} - À tout moment le Joker peut être vaincu...`;
       
       resultContainer.classList.add("hidden");
       comboIndicator.style.display = "none";
-
-      coupCounter = 0;
-      totalHits = 0;
-      hitsUntilCoin = 4;
     }
 
     // Événements
@@ -1301,6 +1359,14 @@
         case 'R':
           initGame();
           break;
+        case 'n':
+        case 'N':
+          setDifficulty('noob');
+          break;
+        case 'b':
+        case 'B':
+          setDifficulty('buchette');
+          break;
         case 'e':
         case 'E':
           setDifficulty('easy');
@@ -1312,10 +1378,6 @@
         case 'd':
         case 'D':
           setDifficulty('hard');
-          break;
-        case 'i':
-        case 'I':
-          setDifficulty('impossible');
           break;
       }
     });
