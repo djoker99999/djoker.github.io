@@ -1153,10 +1153,18 @@
         joker.className = "joker broken " + currentDifficulty;
         message.textContent = "💥 Le Joker a été vaincu !";
       } else {
-        if (maxHP - currentHP >= maxHP * 0.7) {
+        // MODIFICATION: Passer au rouge à 90% des points de vie RESTANTS
+        const healthPercentage = currentHP / maxHP;
+        
+        if (healthPercentage <= 0.9) {
+          // À 90% de points de vie restants ou moins, passer au rouge (difficulté "hard")
+          joker.className = "joker hard";
+          message.textContent = "🚨 Le Joker est enragé ! Il passe au niveau DIFFICILE !";
+        } else if (maxHP - currentHP >= maxHP * 0.7) {
           joker.classList.add("cracked");
           message.textContent = "⚠️ Le Joker commence à se fendre...";
         } else {
+          joker.className = "joker " + currentDifficulty;
           joker.classList.remove("cracked");
           let difficultyName = "";
           switch(currentDifficulty) {
