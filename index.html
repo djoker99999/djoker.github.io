@@ -893,16 +893,8 @@
       <div class="stats-title">📊 Statistiques de Jeu</div>
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-label">Pièces totales:</div>
-          <div class="stat-value" id="totalCoins">0 🪙</div>
-        </div>
-        <div class="stat-item">
           <div class="stat-label">Jokers vaincus:</div>
           <div class="stat-value" id="totalJokers">0</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">Coups totaux:</div>
-          <div class="stat-value" id="totalHits">0</div>
         </div>
         <div class="stat-item">
           <div class="stat-label">Record combo:</div>
@@ -968,10 +960,8 @@
     let currentDifficulty = "noob";
 
     // Variables de sauvegarde
-    let totalCoins = 0;
     let totalJokersDefeated = 0;
     let maxCombo = 0;
-    let totalHitsAllTime = 0;
 
     // Éléments DOM
     const joker = document.getElementById("joker");
@@ -989,9 +979,7 @@
     const continueBtn = document.getElementById("continueBtn");
     
     // Éléments de statistiques
-    const totalCoinsElement = document.getElementById("totalCoins");
     const totalJokersElement = document.getElementById("totalJokers");
-    const totalHitsElement = document.getElementById("totalHits");
     const maxComboElement = document.getElementById("maxCombo");
 
     const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢", "🪓", "🃏"];
@@ -999,10 +987,8 @@
     // Système de sauvegarde
     function saveGame() {
       const gameData = {
-        totalCoins,
         totalJokersDefeated,
         maxCombo,
-        totalHitsAllTime,
         lastPlayed: Date.now()
       };
       
@@ -1024,10 +1010,8 @@
         try {
           const gameData = JSON.parse(savedData);
           
-          totalCoins = gameData.totalCoins || 0;
           totalJokersDefeated = gameData.totalJokersDefeated || 0;
           maxCombo = gameData.maxCombo || 0;
-          totalHitsAllTime = gameData.totalHitsAllTime || 0;
           
           updateStatsDisplay();
           
@@ -1039,9 +1023,7 @@
     }
 
     function updateStatsDisplay() {
-      totalCoinsElement.textContent = `${totalCoins} 🪙`;
       totalJokersElement.textContent = totalJokersDefeated;
-      totalHitsElement.textContent = totalHitsAllTime;
       maxComboElement.textContent = maxCombo;
     }
 
@@ -1258,7 +1240,6 @@
         coupCounter++;
         actualHits++;
         totalHits++;
-        totalHitsAllTime++;
 
         // 1 coup = -1 point de vie
         currentHP--;
@@ -1267,7 +1248,6 @@
         if (hitsUntilCoin <= 0) {
           coinsEarnedThisLog++;
           coinsEarned++;
-          totalCoins++;
           hitsUntilCoin = 4;
         }
       }
@@ -1380,7 +1360,6 @@
       }
       
       // Ajouter les récompenses
-      totalCoins += recompense;
       totalJokersDefeated++;
       
       playBreakSound();
