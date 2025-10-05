@@ -789,9 +789,68 @@
     .difficulty-badge.hard {
       background: linear-gradient(45deg, #F44336, #E91E63);
     }
+
+    /* Styles pour les statistiques */
+    .stats-container {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px 0;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stats-title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #D2691E;
+      font-weight: bold;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat-item {
+      text-align: left;
+      padding: 5px;
+    }
+
+    .stat-label {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    .stat-value {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .save-indicator {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #4CAF50;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8em;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 100;
+    }
+
+    .save-indicator.show {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
+  <div class="save-indicator" id="saveIndicator">Sauvegarde...</div>
+  
   <div class="game-container" id="gameContainer">
     <div class="combo-indicator" id="comboIndicator">COMBO x0</div>
 
@@ -830,6 +889,28 @@
       <p>Un Coup de Hache = Un Point de Vie en Moins</p>
     </div>
 
+    <div class="stats-container">
+      <div class="stats-title">📊 Statistiques de Jeu</div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-label">Pièces totales:</div>
+          <div class="stat-value" id="totalCoins">0 🪙</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Jokers vaincus:</div>
+          <div class="stat-value" id="totalJokers">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Coups totaux:</div>
+          <div class="stat-value" id="totalHits">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Record combo:</div>
+          <div class="stat-value" id="maxCombo">0</div>
+        </div>
+      </div>
+    </div>
+
     <div class="attack-modes">
       <div id="mode1" class="attack-mode-image active">
         <img src="https://i.ibb.co/WNXDxn2y/IMG-7354-Photoroom.png" alt="Rose - 1 coup">
@@ -860,6 +941,7 @@
     <div class="controls">
       <button id="attackBtn">Attaquer (1 coup)</button>
       <button id="resetBtn">Nouveau Joker</button>
+      <button id="saveBtn">Sauvegarder</button>
     </div>
 
     <p id="message"></p>
@@ -869,10 +951,12 @@
       <div id="rewardImage" class="reward-image"></div>
       <p id="coinsResult" class="reward-text"></p>
       <div id="victoryMessage" class="victory-message"></div>
+      <button id="continueBtn">Continuer</button>
     </div>
   </div>
 
   <script>
+    // Variables de jeu
     let maxHP, currentHP, coupCounter, totalHits;
     let hitsUntilCoin = 4;
     let attackMode = 1;
@@ -883,6 +967,13 @@
     let audioContext = null;
     let currentDifficulty = "noob";
 
+    // Variables de sauvegarde
+    let totalCoins = 0;
+    let totalJokersDefeated = 0;
+    let maxCombo = 0;
+    let totalHitsAllTime = 0;
+
+    // Éléments DOM
     const joker = document.getElementById("joker");
     const message = document.getElementById("message");
     const attackBtn = document.getElementById("attackBtn");
@@ -893,8 +984,66 @@
     const comboIndicator = document.getElementById("comboIndicator");
     const rewardImage = document.getElementById("rewardImage");
     const particlesContainer = document.getElementById("particlesContainer");
+    const saveIndicator = document.getElementById("saveIndicator");
+    const saveBtn = document.getElementById("saveBtn");
+    const continueBtn = document.getElementById("continueBtn");
+    
+    // Éléments de statistiques
+    const totalCoinsElement = document.getElementById("totalCoins");
+    const totalJokersElement = document.getElementById("totalJokers");
+    const totalHitsElement = document.getElementById("totalHits");
+    const maxComboElement = document.getElementById("maxCombo");
 
     const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢", "🪓", "🃏"];
+
+    // Système de sauvegarde
+    function saveGame() {
+      const gameData = {
+        totalCoins,
+        totalJokersDefeated,
+        maxCombo,
+        totalHitsAllTime,
+        lastPlayed: Date.now()
+      };
+      
+      localStorage.setItem('jokerGameSave', JSON.stringify(gameData));
+      
+      // Afficher l'indicateur de sauvegarde
+      saveIndicator.textContent = "Sauvegarde réussie!";
+      saveIndicator.classList.add('show');
+      
+      setTimeout(() => {
+        saveIndicator.classList.remove('show');
+      }, 2000);
+    }
+
+    function loadGame() {
+      const savedData = localStorage.getItem('jokerGameSave');
+      
+      if (savedData) {
+        try {
+          const gameData = JSON.parse(savedData);
+          
+          totalCoins = gameData.totalCoins || 0;
+          totalJokersDefeated = gameData.totalJokersDefeated || 0;
+          maxCombo = gameData.maxCombo || 0;
+          totalHitsAllTime = gameData.totalHitsAllTime || 0;
+          
+          updateStatsDisplay();
+          
+          console.log("Partie chargée avec succès!");
+        } catch (e) {
+          console.error("Erreur lors du chargement de la sauvegarde:", e);
+        }
+      }
+    }
+
+    function updateStatsDisplay() {
+      totalCoinsElement.textContent = `${totalCoins} 🪙`;
+      totalJokersElement.textContent = totalJokersDefeated;
+      totalHitsElement.textContent = totalHitsAllTime;
+      maxComboElement.textContent = maxCombo;
+    }
 
     // Système audio
     function initAudioContext() {
@@ -1048,6 +1197,11 @@
       combo++;
       lastHitTime = currentTime;
       
+      if (combo > maxCombo) {
+        maxCombo = combo;
+        updateStatsDisplay();
+      }
+      
       if (combo >= 3) {
         comboIndicator.textContent = `COMBO x${combo}`;
         comboIndicator.style.display = 'block';
@@ -1104,6 +1258,7 @@
         coupCounter++;
         actualHits++;
         totalHits++;
+        totalHitsAllTime++;
 
         // 1 coup = -1 point de vie
         currentHP--;
@@ -1112,6 +1267,7 @@
         if (hitsUntilCoin <= 0) {
           coinsEarnedThisLog++;
           coinsEarned++;
+          totalCoins++;
           hitsUntilCoin = 4;
         }
       }
@@ -1121,6 +1277,10 @@
       }
       
       updateUI();
+      updateStatsDisplay();
+      
+      // Sauvegarde automatique après chaque attaque
+      setTimeout(saveGame, 500);
       
       if (!wasCracked && joker.classList.contains('cracked')) {
         playCrackSound();
@@ -1219,6 +1379,10 @@
           break;
       }
       
+      // Ajouter les récompenses
+      totalCoins += recompense;
+      totalJokersDefeated++;
+      
       playBreakSound();
       
       message.textContent = "💥 Félicitations ! Tu as vaincu le Joker ! 🪓✨";
@@ -1236,6 +1400,9 @@
         victoryMessage.textContent = victoryText;
         
         resultContainer.classList.remove("hidden");
+        
+        // Sauvegarder après la victoire
+        saveGame();
       }, 500);
       
       comboIndicator.style.display = "none";
@@ -1320,6 +1487,11 @@
     // Événements
     document.getElementById("attackBtn").addEventListener("click", attack);
     document.getElementById("resetBtn").addEventListener("click", initGame);
+    document.getElementById("saveBtn").addEventListener("click", saveGame);
+    document.getElementById("continueBtn").addEventListener("click", () => {
+      resultContainer.classList.add("hidden");
+      initGame();
+    });
 
     document.getElementById("mode1").addEventListener("click", () => setAttackMode(1));
     document.getElementById("mode10").addEventListener("click", () => setAttackMode(10));
@@ -1387,6 +1559,13 @@
         case 'D':
           setDifficulty('hard');
           break;
+        case 's':
+        case 'S':
+          if (e.ctrlKey) {
+            e.preventDefault();
+            saveGame();
+          }
+          break;
       }
     });
 
@@ -1399,6 +1578,14 @@
       }
     }, 1000);
 
+    // Sauvegarde automatique toutes les 30 secondes
+    setInterval(saveGame, 30000);
+
+    // Sauvegarde automatique quand l'utilisateur quitte la page
+    window.addEventListener('beforeunload', saveGame);
+
+    // Initialisation du jeu
+    loadGame();
     initGame();
   </script>
 </body>
