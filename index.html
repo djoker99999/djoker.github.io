@@ -893,6 +893,26 @@
       0%, 100% { box-shadow: 0 0 5px rgba(244, 67, 54, 0.5); }
       50% { box-shadow: 0 0 15px rgba(244, 67, 54, 0.8); }
     }
+
+    /* Nouveau style pour le message d'avertissement */
+    .damage-warning {
+      margin: 10px 0;
+      padding: 10px 15px;
+      background: rgba(255, 0, 0, 0.2);
+      border: 1px solid rgba(255, 0, 0, 0.5);
+      border-radius: 15px;
+      color: #ff6b6b;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+      animation: warningPulse 2s infinite;
+      display: none;
+    }
+
+    @keyframes warningPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
   </style>
 </head>
 <body>
@@ -929,6 +949,11 @@
     <div class="log-container">
       <div class="joker easy" id="joker"></div>
       <div class="particles-container" id="particlesContainer"></div>
+    </div>
+
+    <!-- Nouveau message d'avertissement pour les dégâts -->
+    <div id="damageWarning" class="damage-warning">
+      ⚠️ Le Joker a pris beaucoup de dégâts, il commence à se fissurer !
     </div>
 
     <div class="instructions">
@@ -1005,6 +1030,7 @@
     let isAttacking = false;
     let audioContext = null;
     let currentDifficulty = "noob";
+    let damageWarningShown = false;
 
     // Variables de sauvegarde
     let totalJokersDefeated = 0;
@@ -1024,6 +1050,7 @@
     const saveIndicator = document.getElementById("saveIndicator");
     const saveBtn = document.getElementById("saveBtn");
     const continueBtn = document.getElementById("continueBtn");
+    const damageWarning = document.getElementById("damageWarning");
     
     // Éléments de statistiques
     const totalJokersElement = document.getElementById("totalJokers");
@@ -1338,6 +1365,8 @@
     function updateUI() {
       if (currentHP === 0) {
         joker.className = "joker broken " + currentDifficulty;
+        damageWarning.style.display = "none";
+        damageWarningShown = false;
       } else {
         // MODIFICATION: Passer au rouge à 90% des points de vie RESTANTS
         const healthPercentage = currentHP / maxHP;
@@ -1345,11 +1374,19 @@
         if (healthPercentage <= 0.9) {
           // À 90% de points de vie restants ou moins, passer au rouge (difficulté "hard")
           joker.className = "joker hard";
+          
+          // Afficher l'avertissement de dégâts si ce n'est pas déjà fait
+          if (!damageWarningShown) {
+            damageWarning.style.display = "block";
+            damageWarningShown = true;
+          }
         } else if (maxHP - currentHP >= maxHP * 0.7) {
           joker.classList.add("cracked");
         } else {
           joker.className = "joker " + currentDifficulty;
           joker.classList.remove("cracked");
+          damageWarning.style.display = "none";
+          damageWarningShown = false;
         }
       }
     }
@@ -1418,6 +1455,8 @@
       }, 500);
       
       comboIndicator.style.display = "none";
+      damageWarning.style.display = "none";
+      damageWarningShown = false;
     }
 
     function setAttackMode(mode) {
@@ -1489,8 +1528,12 @@
       combo = 0;
       lastHitTime = 0;
       isAttacking = false;
+      damageWarningShown = false;
       
       joker.className = "joker " + currentDifficulty;
+      
+      // Masquer l'avertissement de dégâts
+      damageWarning.style.display = "none";
       
       // Mettre à jour l'interface
       updateUI();
