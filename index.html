@@ -475,6 +475,7 @@
       font-weight: bold;
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
       min-height: 25px;
+      transition: all 0.3s ease;
     }
 
     .result-box {
@@ -846,6 +847,52 @@
     .save-indicator.show {
       opacity: 1;
     }
+    
+    /* Indicateur de difficulté */
+    .difficulty-indicator {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 10px 0;
+      padding: 8px 15px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    
+    .difficulty-indicator.noob {
+      background: rgba(135, 206, 235, 0.2);
+      border: 1px solid rgba(135, 206, 235, 0.5);
+      color: #87CEEB;
+    }
+    
+    .difficulty-indicator.buchette {
+      background: rgba(218, 112, 214, 0.2);
+      border: 1px solid rgba(218, 112, 214, 0.5);
+      color: #DDA0DD;
+    }
+    
+    .difficulty-indicator.easy {
+      background: rgba(76, 175, 80, 0.2);
+      border: 1px solid rgba(76, 175, 80, 0.5);
+      color: #4CAF50;
+    }
+    
+    .difficulty-indicator.medium {
+      background: rgba(255, 152, 0, 0.2);
+      border: 1px solid rgba(255, 152, 0, 0.5);
+      color: #FF9800;
+    }
+    
+    .difficulty-indicator.hard {
+      background: rgba(244, 67, 54, 0.2);
+      border: 1px solid rgba(244, 67, 54, 0.5);
+      color: #F44336;
+      animation: hardIndicatorPulse 2s infinite;
+    }
+    
+    @keyframes hardIndicatorPulse {
+      0%, 100% { box-shadow: 0 0 5px rgba(244, 67, 54, 0.5); }
+      50% { box-shadow: 0 0 15px rgba(244, 67, 54, 0.8); }
+    }
   </style>
 </head>
 <body>
@@ -888,6 +935,8 @@
       <h2>🪓 Frappe le Joker et Gagne le Trésor ! 🪓</h2>
       <p>Un Coup de Hache = Un Point de Vie en Moins</p>
     </div>
+
+    <div id="difficultyIndicator" class="difficulty-indicator easy">Niveau Facile</div>
 
     <div class="stats-container">
       <div class="stats-title">📊 Statistiques de Jeu</div>
@@ -936,8 +985,6 @@
       <button id="saveBtn">Sauvegarder</button>
     </div>
 
-    <p id="message"></p>
-
     <div id="resultContainer" class="hidden result-box">
       <h3>🎉 Joker Vaincu ! 🎉</h3>
       <div id="rewardImage" class="reward-image"></div>
@@ -965,7 +1012,7 @@
 
     // Éléments DOM
     const joker = document.getElementById("joker");
-    const message = document.getElementById("message");
+    const difficultyIndicator = document.getElementById("difficultyIndicator");
     const attackBtn = document.getElementById("attackBtn");
     const resultContainer = document.getElementById("resultContainer");
     const coinsResult = document.getElementById("coinsResult");
@@ -1291,7 +1338,6 @@
     function updateUI() {
       if (currentHP === 0) {
         joker.className = "joker broken " + currentDifficulty;
-        message.textContent = "💥 Le Joker a été vaincu !";
       } else {
         // MODIFICATION: Passer au rouge à 90% des points de vie RESTANTS
         const healthPercentage = currentHP / maxHP;
@@ -1299,22 +1345,11 @@
         if (healthPercentage <= 0.9) {
           // À 90% de points de vie restants ou moins, passer au rouge (difficulté "hard")
           joker.className = "joker hard";
-          message.textContent = "🚨 Le Joker est enragé ! Il passe au niveau DIFFICILE !";
         } else if (maxHP - currentHP >= maxHP * 0.7) {
           joker.classList.add("cracked");
-          message.textContent = "⚠️ Le Joker commence à se fendre...";
         } else {
           joker.className = "joker " + currentDifficulty;
           joker.classList.remove("cracked");
-          let difficultyName = "";
-          switch(currentDifficulty) {
-            case "noob": difficultyName = "noob"; break;
-            case "buchette": difficultyName = "buchette"; break;
-            case "easy": difficultyName = "facile"; break;
-            case "medium": difficultyName = "moyenne"; break;
-            case "hard": difficultyName = "difficile"; break;
-          }
-          message.textContent = `Joker ${difficultyName} - À tout moment le Joker peut être vaincu...`;
         }
       }
     }
@@ -1364,8 +1399,6 @@
       
       playBreakSound();
       
-      message.textContent = "💥 Félicitations ! Tu as vaincu le Joker ! 🪓✨";
-      
       setTimeout(() => {
         rewardImage.style.backgroundImage = `url('${rewardImg}')`;
         
@@ -1412,6 +1445,18 @@
       // Mettre à jour l'apparence du Joker
       joker.className = "joker " + difficulty;
       
+      // Mettre à jour l'indicateur de difficulté
+      const difficultyNames = {
+        noob: "Noob",
+        buchette: "Buchette",
+        easy: "Facile",
+        medium: "Moyen",
+        hard: "Difficile"
+      };
+      
+      difficultyIndicator.textContent = `Niveau ${difficultyNames[difficulty]}`;
+      difficultyIndicator.className = `difficulty-indicator ${difficulty}`;
+      
       // Réinitialiser le jeu avec la nouvelle difficulté
       initGame();
     }
@@ -1447,17 +1492,8 @@
       
       joker.className = "joker " + currentDifficulty;
       
-      // Message selon la difficulté
-      let difficultyName = "";
-      switch(currentDifficulty) {
-        case "noob": difficultyName = "noob"; break;
-        case "buchette": difficultyName = "buchette"; break;
-        case "easy": difficultyName = "facile"; break;
-        case "medium": difficultyName = "moyenne"; break;
-        case "hard": difficultyName = "difficile"; break;
-      }
-      
-      message.textContent = `Joker ${difficultyName} - À tout moment le Joker peut être vaincu...`;
+      // Mettre à jour l'interface
+      updateUI();
       
       resultContainer.classList.add("hidden");
       comboIndicator.style.display = "none";
